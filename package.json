@@ -1,0 +1,25 @@
+{
+  "name": "godefer",
+  "version": "1.0.0",
+  "description": "Golang Defer implement in Javascript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sungfeichi/godefer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sungfeichi/godefer/issues"
+  },
+  "homepage": "https://github.com/sungfeichi/godefer#readme",
+  "keywords": [
+    "go","defer","polyfill"
+  ],
+  "author": "sungfeichi",
+  "license": "ISC"
+}
+
+
