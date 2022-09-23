@@ -40,7 +40,7 @@ let res2 = godefer(defer=>async (name)=>{
 	defer(function(){
 		//console.log(this)
 		//this.a+=100
-		this.then(v=>v.a+=1000)
+		this.a+=1000
 	})
 	defer(()=>100)
 	for(let i=1;i<10;i++){
