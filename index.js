@@ -6,8 +6,8 @@ function isAsync(fn) {
 }
 export function godefer(go) {
 	let stack = []
-	function defer(call) {
-		stack.push(call)
+	function defer(cb,capt=[]) {
+		stack.push([cb,capt])
 	}
 	let blockfn = go(defer)
 	let asy = isAsync(blockfn)
@@ -19,8 +19,8 @@ export function godefer(go) {
 			finally {
 				let named = isObj(res)
 				let that = named ? res : {}
-				for (let fc of stack.reverse()) {
-					fc.bind(that)()
+				for (let [cb,capt] of stack.reverse()) {
+					cb.bind(that)(...capt)
 				}
 			}
 			return res
@@ -34,8 +34,8 @@ export function godefer(go) {
 			finally {
 				let named = isObj(res)
 				let that = named ? res : {}
-				for (let fc of stack.reverse()) {
-					fc.bind(that)()
+				for (let [cb,capt] of stack.reverse()) {
+					cb.bind(that)(...capt)
 				}
 			}
 			return res

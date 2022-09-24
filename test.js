@@ -67,3 +67,18 @@ let t5 = godefer((defer) => async (name) => {
 	return { a: 1 };
 })("hello");
 t5.catch((e) => console.log("t5 capture error", e.message));
+
+//capture value
+let t6 = godefer((defer) => (name) => {
+	console.log("begin");
+	let a = 100;
+	defer(function (a) {//formal parameter can be any another
+		console.log(a)//should be 100
+		if (a !== 100)
+			throw new Error('capture fail')
+	}, [a])
+	a += 10
+	console.log("end");
+	return 10;
+})("hello");
+console.log("t6 " + (t6 === 10 ? "success" : "fail"));
