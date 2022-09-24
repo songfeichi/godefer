@@ -9,7 +9,7 @@ The behavior of defer statements is straightforward and predictable. There are t
 3. Deferred functions may read and assign to the returning function’s named return values.  
 √, no if return a value, yes return an object. Support async function.
 
-#Usage:
+## Usage:
 ```
 godefer(defer=>(args)=>{
 	...somecode
@@ -19,3 +19,7 @@ godefer(defer=>(args)=>{
 })('hello')
 ```
 see more usage in test.js
+
+## Compare with try-finally:
+1. Variables declared by let/const can't be use in finally block, have to use var.
+2. Deferred functions will not run if encounter errors before, but finally block don't know.
