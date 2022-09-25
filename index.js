@@ -4,17 +4,16 @@ function isObj(value) {
 function isAsync(fn) {
 	return Object.prototype.toString.call(fn) === "[object AsyncFunction]"
 }
-export function godefer(go) {
+export function godefer(fn) {
 	let stack = []
 	function defer(cb, capt = []) {
 		stack.push([cb, capt])
 	}
-	let blockfn = go(defer)
-	let asy = isAsync(blockfn)
+	let asy = isAsync(fn)
 	if (!asy) {
-		return (...args) => {
+		return (() => {
 			try {
-				var res = blockfn(...args)
+				var res = fn(defer)
 			}
 			finally {
 				let named = isObj(res)
@@ -24,12 +23,12 @@ export function godefer(go) {
 				}
 			}
 			return res
-		}
+		})()
 	}
 	else {
-		return async (...args) => {
+		return (async () => {
 			try {
-				var res = await blockfn(...args)
+				var res = await fn(defer)
 			}
 			finally {
 				let named = isObj(res)
@@ -39,6 +38,6 @@ export function godefer(go) {
 				}
 			}
 			return res
-		}
+		})()
 	}
 }

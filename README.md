@@ -11,12 +11,12 @@ The behavior of defer statements is straightforward and predictable. There are t
 
 ## Usage:
 ```
-godefer(defer=>(args)=>{
+godefer(defer=>{
 	...somecode
 	defer(somefunc)
 	...somecode
 	return 42 //return an object for named return values
-})('hello')
+})
 ```
 see more usage in test.js
 
